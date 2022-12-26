@@ -48,6 +48,29 @@ const App = () => {
     }
 
   }
+  const handleTimesNumbers = () => {
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('x')
+  } else {
+    const times = Number(firstNumber)*Number(currentNumber);
+    setCurrentNumber(String(times))
+    setOperation('')
+  }
+}
+
+  const handleDividesNumbers = () => {
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('/')
+  } else {
+    const slice = Number(firstNumber)/Number(currentNumber);
+    setCurrentNumber(String(slice))
+    setOperation('')
+  }
+}
 
   const handleEquals = () => {
 
@@ -58,6 +81,12 @@ const App = () => {
             break;
           case '-':
             handleMinusNumbers();
+            break;
+          case 'x':
+            handleTimesNumbers();
+            break;
+          case '/':
+            handleDividesNumbers();
             break;
           default: 
             break;
@@ -71,9 +100,9 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
-          <Button label="c" onClick={handleOnClear}/>
+          <Button label="x" onClick={handleTimesNumbers}/>
+          <Button label="/" onClick={handleDividesNumbers}/>
+          <Button label="C" onClick={handleOnClear}/>
           <Button label="."/>
         </Row>
         <Row>
@@ -93,6 +122,9 @@ const App = () => {
           <Button label="2" onClick={() => handleAddNumber('2')}/>
           <Button label="3" onClick={() => handleAddNumber('3')}/>
           <Button label="=" onClick={handleEquals}/>
+        </Row>
+        <Row>
+          <Button label="0" onClick={() => handleAddNumber('0')}/>
         </Row>
       </Content>
     </Container>
